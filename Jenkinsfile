@@ -8,10 +8,19 @@ pipeline {
     tools {
         maven 'maven-3.9'
     }
-    environment {
-        IMAGE_NAME='nguyenmanhtrinh/demo-app:java-maven-2.0'
-    }
+    
     stages {
+        stage("Increment Version") {
+            steps {
+                script {
+                    sh 'mvn build-helper:parse-version version:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit'
+                       def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                       def version = matcher[0][1]
+                       env.IMAGE_NAME="$version-$BUILD_NUMBER"
+                }
+            }
+        }
+
         stage("build jar") {
             steps {
                 script {
@@ -48,6 +57,28 @@ pipeline {
                     }
                 }
             }
-        }               
+        } 
+
+        stage("Automatic Commit the new version to Git Repo") {
+            steps {
+                script{
+                    withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
+                        sh "git remote set-url orgin https://${USER}:${PASS}@github.com/ManhTrinhNguyen/Jenkins-AWS.git"
+                        
+                        sh 'git config --global user.email aws@example.com'
+                        sh 'git config --global user.name AWS'
+
+                        sh 'git status'
+                        sh 'git config --list'
+                        sh 'git branch'
+
+                        sh 'git add .'
+                        sh 'git commit -m "ci:bump version"'
+                        sh 'git push origin HEAD:main'
+                    }
+                    
+                }
+            }
+        }              
     }
 } 
