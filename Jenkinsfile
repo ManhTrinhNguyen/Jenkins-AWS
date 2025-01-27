@@ -63,7 +63,7 @@ pipeline {
             steps {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
-                        sh "git remote set-url orgin https://${USER}:${PASS}@github.com/ManhTrinhNguyen/Jenkins-AWS.git"
+                        sh "git remote set-url origin https://${USER}:${PASS}@github.com/ManhTrinhNguyen/Jenkins-AWS.git"
 
                         sh 'git config --global user.email aws@example.com'
                         sh 'git config --global user.name AWS'
