@@ -25,7 +25,7 @@ pipeline {
             steps {
                 script {
                     echo 'Build Docker Image'
-                    buildDockerImage(env.$IMAGE_NAME)
+                    buildDockerImage(env.IMAGE_NAME)
                     echo 'Login to docker hub'
                     dockerLoginToDockerHub()
                     echo 'Push to Docker hub'
