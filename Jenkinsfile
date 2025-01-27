@@ -13,10 +13,10 @@ pipeline {
         stage("Increment Version") {
             steps {
                 script {
-                    sh 'mvn build-helper:parse-version version:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit'
-                       def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
-                       def version = matcher[0][1]
-                       env.IMAGE_NAME="$version-$BUILD_NUMBER"
+                    sh 'mvn build-helper:parse-version version:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} versions:commit'
+                    def matcher = readFile('pom.xml') =~ '<version>(.+)</version>'
+                    def version = matcher[0][1]
+                    env.IMAGE_NAME="$version-$BUILD_NUMBER"
                 }
             }
         }
@@ -64,7 +64,7 @@ pipeline {
                 script{
                     withCredentials([usernamePassword(credentialsId: 'github-credentials', passwordVariable: 'PASS', usernameVariable: 'USER')]){
                         sh "git remote set-url orgin https://${USER}:${PASS}@github.com/ManhTrinhNguyen/Jenkins-AWS.git"
-                        
+
                         sh 'git config --global user.email aws@example.com'
                         sh 'git config --global user.name AWS'
 
