@@ -47,3 +47,6 @@
   2. Create docker-compose.yaml file
   3. Adjust Jenkins to execute docker-compose command on EC2 instance 
     1. **In the shh agen block**: copy docker-compose to EC2 `sh "scp docker-compose.yaml ec2-user@54.215.92.78:/home/ec2-user"`
+
+## Extract to Shell Script 
+  1. When we have execute multiple command once we connect to a EC2 server
