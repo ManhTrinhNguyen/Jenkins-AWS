@@ -24,7 +24,11 @@
 ### Connect to EC2 server instance from Jenkins server via ssh (ssh agent)
   1. **Install SSH agent plugin from Jenkins** : `Go to Manage -> Plugin -> SSH agent` This plugin allow me to use SSH credentials of the EC2 server to SSH into my instance 
   2. **Create EC2 Credentials in the Multibranch pipeline scope**: Choose SSH username with private key -> paste my .pem key to that
-  3. **Open ssh port with Jenkins Ip allow Jenkins to connect to AWS**
+  3. **Open ssh port with Jenkins Ip allow Jenkins to connect to AWS** : Configure Firewall rule
   4. **Jenkins file syntax for Plugin**: In the Pipeline job I will see a Pipeline Syntax 
   5. **Connect to EC2 and Run Docker In Jenkinsfile** `sh "ssh -o StrictHostKeyChecking=no ec2-user@54.215.92.78 docker run -d -p 3080:3080 nguyenmanhtrinh/demo-app:react-1.0"`
     1. **-o StrictHostKeyChecking=no**: This flag help me to supress to SSH pop up bcs this is not interactive mode 
+
+# Add Build Stages and Test Stages 
+## Get Share Library 
+  1. 
