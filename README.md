@@ -31,4 +31,18 @@
 
 # Add Build Stages and Test Stages 
 ## Get Share Library 
-  1. 
+  ```
+    library identifier: 'jenkins-shared-library@main', retriever: modernSCM(
+    [$class: 'GitSCMSource',
+    remote: 'https://github.com/ManhTrinhNguyen/Jenkins-Docker-Excercise-Shared-Library.git',
+    credentialsId: 'github-credentials'])
+  ```
+### NOTE 
+  1. sshagent is available for every server Not only EC2 instance
+  2. Deploying App using Docker Compose 
+    1. From the Git Repo Take docker compose file copy to server 
+
+## Using Docker-Compose for Deployment 
+  1. Install docker-compose on EC2 instance : `sudo curl -L https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m) -o /usr/local/bin/docker-compose` Docker-compose not in the Yum package so I use this command to install. Then make it executable `sudo chmod +x /usr/local/bin/docker-compose`
+  2. Create docker-compose.yaml file
+  3. Adjust Jenkins to execute docker-compose command on EC2 instance 
