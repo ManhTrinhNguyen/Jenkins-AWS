@@ -50,3 +50,7 @@
 
 ## Extract to Shell Script 
   1. When we have execute multiple command once we connect to a EC2 server
+  2. Create shell script file then put all the command into that so in Jenkins file I just need to run a shell script
+
+## Replace Docker image with newly build version 
+  1. **In Docker-Compose**: Instead of hardcode image name I set a variable for it like `${IMAGE_NAME}`
