@@ -54,3 +54,4 @@
 
 ## Replace Docker image with newly build version 
   1. **In Docker-Compose**: Instead of hardcode image name I set a variable for it like `${IMAGE_NAME}`
+  2. **In server-cmds shell**: Set a image Variable . `export IMAGE_NAME=$1`
