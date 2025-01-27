@@ -57,5 +57,5 @@
   2. **In server-cmds shell**: Set a image Variable . `export IMAGE_NAME=$1`
 
 ## Dynamic Increment Version 
-  1. **Automatic increment version in Maven**: `mvn build-helper:parse-version version:set -DnewVersion=\${parsedVersion.majorVersion}.\${parsedVersion.minorVersion}.\${parsedVersion.nextIncrementalVersion} versions:commit`
+  1. **Automatic increment version in Maven**: `mvn build-helper:parse-version versions:set -DnewVersion=\\\${parsedVersion.majorVersion}.\\\${parsedVersion.minorVersion}.\\\${parsedVersion.nextIncrementalVersion} versions:commit`
   2. **Take version from pom.xml**: `def version = matcher[0][1] | env.IMAGE_NAME="$version-$BUILD_NUMBER"`
