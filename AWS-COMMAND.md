@@ -1,3 +1,7 @@
+## AWS CMD structure 
+  - aws <command> <subcommand> [options and parameters]
+  - <command> : AWS services (EC2 or etc ...)
+  - <subcommand>: which operations ? (run-instances, configure key-pair, create-security-group)
 ## Create EC2 Instance
 aws ec2 run-instances
   --image-id ami-0fca1aacaa1ed9168
