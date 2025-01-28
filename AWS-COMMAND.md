@@ -1,3 +1,4 @@
+## Create EC2 Instance
 aws ec2 run-instances
   --image-id ami-0fca1aacaa1ed9168
   --count 1
@@ -11,12 +12,14 @@ aws ec2 run-instances
 **Create-keypair**: `aws ec2 create-key-pair --key-name MyKpCli --query 'KeyMaterial' --output text > MyKpCli.pem`
 **Get subnet ID**: `aws ec2 describe-subnets`
 
+## Filter and Query
 **aws <command> describe-**: Filter and Query 
   - List certain component
   - Add filter : `aws ec2 describe-instances --filters <Name, Values>` Pick the components
   - Query : Pick specific attribute of those component
   - For example I want to get InstanceId value : `aws ec2 describe-instances --filters "Name=tag:Type, Values=web-server-with-docker" --query "Reservations[].Instances[].InstanceId"`
 
+## IAM Command
 **Using IAM command** : Create User, Group, and assign permissions
   - **Create group** `aws iam create-group --group-name MyGroupCli`
   - **Create user** `aws iam create-user --user-name MyUserCli`
@@ -27,11 +30,11 @@ aws ec2 run-instances
     2. **Attach Policy to a Group**: `aws iam attach-group-policy --group-name MyGroupCli --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess`
     3. **Show list attached group**: `aws iam list-attached-group-policies --group-name MyGroupCli`
 
+## Create Credentials for User
 **Create Crenditals for User**: 
   1. **Access to a Managment Console** : User need a password `aws iam create-login-profile --user-name MyUserCli --password MyPassword! --password-reset-required`
   2. **Also want User able to execute AWS CLI** : User need assign access key-pair
-
-
+### Create Policy and Assign to Group
 **Create Policy and Assign to a Group** : Create Json file that define a set of permission in that policy
 *NOTE: This is a AWS policy Json file Reference*
 ```
@@ -53,4 +56,10 @@ aws ec2 run-instances
 ```
   1. **To create policy to change passowrd**: `aws iam create-policy --policy-name changePwd --policy-document file://changePasswordPolicy.json`
   2. **Attach the polocy to user group**: `aws iam attach-group-policy --group-name MyGroupCli --policy-arn arn:aws:iam::565393037799:policy/changePwd`
+
+### Create Access Key for new User 
+  - **Create access key**: `aws iam create-access-key --user-name MyUserCli` 
+### Switch AWS user for AWS CLI 
+  - **Over write the default User aws configure command**: `aws configure set aws_access_key_id <Access Key>`
+  - **No Overwrite leave admin as default**: By setting Environment Variable `export AWS_ACCESS_KEY_ID=<Access Key> && export AWS_SECRET_ACCESS_KEY=<SecretAccessKey>`
 
