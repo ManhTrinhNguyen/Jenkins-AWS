@@ -63,7 +63,4 @@
 # Install AWS CLI 
  1. **On MacOS**: `brew install awscli`
  2. **Configure AWS CLI to connect to AWS account**: 
-## AWS CMD structure 
-  - aws <command> <subcommand> [options and parameters]
-    - <command> : AWS services (EC2 or etc ...)
-    - <subcommand>: which operations ? (run-instances, configure key-pair, create-security-group)
+
