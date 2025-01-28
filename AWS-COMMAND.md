@@ -10,3 +10,47 @@ aws ec2 run-instances
 **Create Security Groups rules**: `aws ec2 authorize-security-group-ingress --group-id sg-0bed0e6f3f4ebfc3c --protocol tcp --port 22 --cidr 198.27.191.24/32`
 **Create-keypair**: `aws ec2 create-key-pair --key-name MyKpCli --query 'KeyMaterial' --output text > MyKpCli.pem`
 **Get subnet ID**: `aws ec2 describe-subnets`
+
+**aws <command> describe-**: Filter and Query 
+  - List certain component
+  - Add filter : `aws ec2 describe-instances --filters <Name, Values>` Pick the components
+  - Query : Pick specific attribute of those component
+  - For example I want to get InstanceId value : `aws ec2 describe-instances --filters "Name=tag:Type, Values=web-server-with-docker" --query "Reservations[].Instances[].InstanceId"`
+
+**Using IAM command** : Create User, Group, and assign permissions
+  - **Create group** `aws iam create-group --group-name MyGroupCli`
+  - **Create user** `aws iam create-user --user-name MyUserCli`
+  - **Add user to Group**: `aws iam add-user-to-group --user-name MyUserCli --group-name MyGroupCli`
+  - **Get Group** : `aws iam get-group --group-name MyGroupCli`
+  - **Give User Permisstion for EC2 service**: `aws iam attach-group-policy`
+    1. **Get a Arn policy**: `aws iam list-policies --query 'Policies[?PolicyName==`AmazonEC2FullAccess`].Arn' --output text`
+    2. **Attach Policy to a Group**: `aws iam attach-group-policy --group-name MyGroupCli --policy-arn arn:aws:iam::aws:policy/AmazonEC2FullAccess`
+    3. **Show list attached group**: `aws iam list-attached-group-policies --group-name MyGroupCli`
+
+**Create Crenditals for User**: 
+  1. **Access to a Managment Console** : User need a password `aws iam create-login-profile --user-name MyUserCli --password MyPassword! --password-reset-required`
+  2. **Also want User able to execute AWS CLI** : User need assign access key-pair
+
+
+**Create Policy and Assign to a Group** : Create Json file that define a set of permission in that policy
+*NOTE: This is a AWS policy Json file Reference*
+```
+  {
+    "Version": "2012-10-17",
+    "Statement": [
+      {
+        "Effect": "Allow",
+        "Action": ["iam:ChangePassword"],
+        "Resource": ["arn:aws:iam::565393037799:user/${aws:username}"]
+      },
+      {
+        "Effect": "Allow",
+        "Action": ["iam:GetAccountPasswordPolicy"],
+        "Resource": "*"
+      }		
+    ]
+}
+```
+  1. **To create policy to change passowrd**: `aws iam create-policy --policy-name changePwd --policy-document file://changePasswordPolicy.json`
+  2. **Attach the polocy to user group**: `aws iam attach-group-policy --group-name MyGroupCli --policy-arn arn:aws:iam::565393037799:policy/changePwd`
+
