@@ -15,7 +15,8 @@ aws ec2 run-instances
 
 **Create VPC**
 ```
-  vpc-01a9e72cd0d160ab6
+  - Create vpc with specific cidr block : aws ec2 create-vpc --cidr-block 172.32.0.0/24 --query Vpc.VpcId --output text
+  vpc-0d434a4d2b1901c4b
 ```
 
 **Create Security Group**: `aws ec2 create-security-group --group-name my-sg --description "My SG" --vpc-id vpc-00f5f8e457eb61189`
