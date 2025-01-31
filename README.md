@@ -1,13 +1,3 @@
-# Create IAM User
-```
-  - We can give user 2 types of access:
-  - From the Console (UI): Login to the UI. Configure stuff
-  - Programatic Access which i can assign to IAM account after i have created Account . This is when I execute different task from the command line Or could be for Services like Jenkins
-  - Create access key for a User.
-  - Configure Access key and Secret Access key on Laptop
-  - Program matic access : Allow me to connect to the AWS Account using AWS CLI
-```
-
 # Deploy Application to EC2 
 ## Creat EC2 instances
 ### Step to launch Instance
