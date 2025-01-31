@@ -2,6 +2,17 @@
   - aws <command> <subcommand> [options and parameters]
   - **command** : AWS services (EC2 or etc ...)
   - **subcommand**: which operations ? (run-instances, configure key-pair, create-security-group)
+
+# Create IAM User
+```
+  - We can give user 2 types of access:
+  - From the Console (UI): Login to the UI. Configure stuff
+  - Programatic Access which i can assign to IAM account after i have created Account . This is when I execute different task from the command line Or could be for Services like Jenkins
+  - Create access key for a User.
+  - Configure Access key and Secret Access key on Laptop
+  - Program matic access : Allow me to connect to the AWS Account using AWS CLI
+```
+
 ## Create EC2 Instance
 ```
 aws ec2 run-instances
