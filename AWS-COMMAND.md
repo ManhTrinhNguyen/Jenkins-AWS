@@ -18,7 +18,12 @@ aws ec2 run-instances
   - Create VPC with specific cidr block : aws ec2 create-vpc --cidr-block 172.32.0.0/24 --query Vpc.VpcId --output text
   vpc-0d434a4d2b1901c4b
 
-  - Create Subnet with VPC id : aws ec2 create-subnet --vpc-id vpc-0d434a4d2b1901c4b --available-zone us-west-1a --cidr-block 172.32.1.0/26 --query Subnet.SubnetId --output text
+  - Create Subnet with VPC id : aws ec2 create-subnet --vpc-id vpc-0d434a4d2b1901c4b --availability-zone us-west-1a --cidr-block 172.32.0.0/25 --query Subnet.SubnetId --output text
+subnet-0d220d84c63cad99e
+
+  IP Calculator: https://mxtoolbox.com/subnetcalculator.aspx
+  IP Calculator with binary values: http://jodies.de/ipcalc
+  Calculate sub-CIDR blocks: http://www.davidc.net/sites/default/subnets/subnets.html 
 ```
 
 **Create Security Group**: `aws ec2 create-security-group --group-name my-sg --description "My SG" --vpc-id vpc-00f5f8e457eb61189`
